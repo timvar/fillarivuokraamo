@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <title>Admin rental agreement list</title>
+
+</head>
+
+<body>
+<div class="container">
+<div class="row">
+
+        <h1>Availability</h1>
+</div>
+    <div class="row">
+      <table class="table table-striped">
+            <tr>
+                <th>Date</th>
+                <th>Availability</th>
+            </tr>
+
+            <tr th:each = "item : ${bikes}">
+                <td th:text="${#dates.format(item.date, 'dd-MM-yyyy')}">Date</td>
+                <td th:text="${item.availability}">Availability</td>
+            </tr>
+        </table>
+    </div>
+    <div class="row" style="margin-top: 20px">
+        <a href="/index" class="btn btn-primary">Home</a>
+    </div>
+
+</div>
+</div>
+</body>
+</html>

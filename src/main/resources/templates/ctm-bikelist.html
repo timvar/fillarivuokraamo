@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bikelist</title>
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, text/html, charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<!-- List bikes to customer -->
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Bikes</h2>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <th>Rent per day</th>
+                    <th>Category</th>
+                </tr>
+
+                <tr th:each = "bike : ${bikes}">
+                    <td th:text="${bike.manufacturer}">Manufacturer</td>
+                    <td th:text="${bike.model}">Model</td>
+                    <td th:text="${bike.rentPerDay}">Rent</td>
+                    <td th:text="${bike.category.categoryName}">Category</td>
+
+                </tr>
+            </table>
+            <a href="/index">Home</a>
+        </div>
+
+    </div>
+</body>
+</html>

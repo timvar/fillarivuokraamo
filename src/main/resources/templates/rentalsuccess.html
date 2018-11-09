@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit rental</title>
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, text/html, charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h3 style="color: darkgreen">Your bike rental was successfully entered into our system!</h3>
+    </div>
+    <div class="row">
+        Rental ID:<div style="margin-left: 10px" th:text="${rental.rentalId}">RentalId</div>
+    </div>
+    <div class="row">
+        First name:<div style="margin-left: 10px" th:text="${rental.firstName}">First</div>
+    </div>
+    <div class="row">
+        Last name:<div style="margin-left: 10px" th:text="${rental.lastName}">Last</div>
+    </div>
+    <div class="row">
+        Email:<div style="margin-left: 10px" th:text="${rental.email}">Email</div>
+    </div>
+    <div class="row">
+        Phone:<div style="margin-left: 10px" th:text="${rental.phone}">Phone</div>
+    </div>
+    <div class="row">
+        Start:<div style="margin-left: 10px" th:text="${#dates.format(rental.startDay, 'dd-MM-yyyy')}">Start</div>
+    </div>
+    <div class="row">
+        End:<div style="margin-left: 10px" th:text="${#dates.format(rental.endDay, 'dd-MM-yyyy')}">End</div>
+    </div>
+
+    <div class="row">
+        Bike:<div style="margin-left: 10px" th:text="${rental.bike.model}">Bike</div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+        <h5 style="color: darkgreen">Please contact our customer service in case you need to make any changes.</h5>
+    </div>
+    <div class="row" style="margin-top: 20px">
+        <a href="/index" class="btn btn-primary">Home</a>
+    </div>
+
+</div>
+</body>
+</html>

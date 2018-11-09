@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Bikelist</title>
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, text/html, charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Bikes</h2>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <tr>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <th>Rent per day</th>
+                    <th>Qty</th>
+                    <th>Category</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr th:each = "bike : ${bikes}">
+                    <td th:text="${bike.manufacturer}">Manufacturer</td>
+                    <td th:text="${bike.model}">Model</td>
+                    <td th:text="${bike.rentPerDay}">Rent</td>
+                    <td th:text="${bike.bikeQty}">Qty</td>
+                    <td th:text="${bike.category.categoryName}">Category</td>
+                    <td><a th:href="@{/admin/edit/{id}(id=${bike.bikeId})}" class="btn btn-primary">Edit</a></td>
+                    <td><a th:href="@{/admin/confirm-delete/{id}(id=${bike.bikeId})}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <a href="/admin/add-bike" class="btn btn-primary" style="margin-right: 20px">Add Bike</a>
+
+            <a href="/admin/home" class="btn btn-primary">Admin home</a>
+        </div>
+        <div id="golden"></div>
+        <div class="row">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" class="btn btn-danger"/>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

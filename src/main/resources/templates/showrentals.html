@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <title>Admin rental agreement list</title>
+
+</head>
+
+<body>
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-1">
+        <h1>Rental Agreements</h1>
+
+        <table class="table table-striped">
+            <tr>
+                <th>Rental</th>
+                <th>Lastname</th>
+                <th>Firstname</th>
+                <th>Start</th>
+                <th>End</th>
+
+
+
+                <th></th>
+
+            </tr>
+            <tr th:each = "rental : ${rentals}">
+                <td th:text="${rental.id}">Rental</td>
+                <td th:text="${rental.lastName}">Last Name</td>
+                <td th:text="${rental.firstName}">First Name</td>
+                <td th:text="${#dates.format(rental.startDay, 'dd-MM-yyyy')}">Start</td>
+                <td th:text="${#dates.format(rental.endDay, 'dd-MM-yyyy')}">End</td>
+            </tr>
+        </table>
+
+
+
+    </div>
+
+</div>
+</body>
+</html>

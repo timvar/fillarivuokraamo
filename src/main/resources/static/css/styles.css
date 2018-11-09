@@ -1,0 +1,17 @@
+#header {
+    background-color: lightblue;
+}
+
+#golden {
+    height: 5px;
+    background-color: palegoldenrod;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#grey {
+    height: 5px;
+    background-color: grey;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
