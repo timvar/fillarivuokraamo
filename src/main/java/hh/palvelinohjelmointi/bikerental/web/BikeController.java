@@ -69,24 +69,49 @@ public class BikeController {
     @PostMapping(value = "/rentalform-save")
     public String saveRental(Rental rental) {
 
+        /** find only active rentals **/
         RentalStatus rentalStatusActive = rentalStatusRepository.findRentalStatusByStatusName("active").get();
 
-        /** Check bike availability in given rental period **/
-        long rentalCount = rentalRepository.countRentalsByStartDayIsLessThanEqualAndEndDayIsGreaterThanEqualAndBikeAndStatusIs(
-                rental.getEndDay(), rental.getStartDay(), rental.getBike(), rentalStatusActive);
+        /** rental start date and end date **/
+        Date startDate = rental.getStartDay();
+        Date endDate = rental.getEndDay();
+
+        /** difference between rental start date and end date **/
+        int diffInDays = (int) (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
+        long rentalCount = 0;
+        String returnUrl = "";
+
+        boolean bikesAvailable = true;
+
+        /** Use calendar starting from given search start date **/
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(rental.getStartDay());
 
         /** Total number of bikes to rent **/
         int bikesForRent = bikeRepository.findById(rental.getBike().getBikeId()).get().getBikeQty();
 
-        String returnUrl = "";
+        for (int i = 0; i <= diffInDays; i++) {
 
-        /** If > 0, there are bikes available in given rental period **/
-        if (bikesForRent - rentalCount > 0) {
+            /** Check bike availability in given rental period **/
+            rentalCount = rentalRepository.countRentalsByStartDayIsLessThanEqualAndEndDayIsGreaterThanEqualAndBikeAndStatusIs(
+                    calendar.getTime(), calendar.getTime(), rental.getBike(), rentalStatusActive);
+
+            if (bikesForRent - rentalCount <= 0) {
+                bikesAvailable = false;
+            }
+
+            /** increase date by one day **/
+            calendar.add(Calendar.DATE,1);
+
+        }
+
+        /** If true, there are bikes available in given rental period **/
+
+        if (bikesAvailable) {
             Rental savedRental = rentalRepository.save(rental);
             String savedRentalId = Long.toString(savedRental.getRentalId());
             returnUrl = "redirect:/rentalsuccess/"+savedRentalId;
         }
-
         /** no bikes available, go to search page **/
         else {
             returnUrl = "redirect:/availability";
@@ -257,6 +282,7 @@ public class BikeController {
     public String editRental(@PathVariable("id") Long rentalId, Model model) {
         model.addAttribute("rental", rentalRepository.findById(rentalId));
         model.addAttribute("statusnames", rentalStatusRepository.findAll());
+        model.addAttribute("bikes", bikeRepository.findAll());
         return "editrental";
     }
 
@@ -268,7 +294,7 @@ public class BikeController {
     @PostMapping("/admin/update-rental")
     public String updateRental(Rental rental){
         rentalRepository.save(rental);
-        return "redirect:rentallist";
+        return "redirect:/admin/rentallist";
     }
 
     /**
@@ -278,7 +304,7 @@ public class BikeController {
     @PostMapping("/admin/update")
     public String updateBike(Bike bike){
         bikeRepository.save(bike);
-        return "redirect:bikelist";
+        return "redirect:/admin/bikelist";
     }
 
     /**
@@ -300,6 +326,6 @@ public class BikeController {
     @PostMapping("/admin/delete")
     public String deleteBike(Bike bike){
         bikeRepository.deleteById(bike.getBikeId());
-        return "redirect:bikelist";
+        return "redirect:/admin/bikelist";
     }
 }

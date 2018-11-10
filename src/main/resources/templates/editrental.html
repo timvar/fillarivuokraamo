@@ -38,15 +38,10 @@
             </div>
 
 
-            <div class="form-group">
-                <label for="startday">Start day</label>
-                <input type="date" id="startday" class="form-control" name="startDay"  th:field="*{startDay}"/>
-            </div>
 
-            <div class="form-group">
-                <label for="endday">End day</label>
-                <input type="date" id="endday" class="form-control" name="endDay" th:field="*{endDay}"/>
-            </div>
+
+                <input type="hidden" id="startday" class="form-control" name="startDay"  th:field="*{startDay}"/>
+                <input type="hidden" id="endday" class="form-control" name="endDay" th:field="*{endDay}"/>
 
             <div class="form-group">
                 <label for="statuslist">Status</label>
@@ -54,6 +49,8 @@
                     <option th:each="statusname: ${statusnames}" th:value="${statusname.statusId}" th:text="${statusname.statusName}"></option>
                 </select>
             </div>
+
+                <input type="hidden" id="bike" class="form-control" name="bike" th:field="*{bike}"/>
 
             <div class="form-group">
                 <input type="hidden" th:field="*{rentalId}" />

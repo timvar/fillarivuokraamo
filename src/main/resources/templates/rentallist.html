@@ -21,6 +21,8 @@
                 <th>Rental</th>
                 <th>Lastname</th>
                 <th>Firstname</th>
+                <th>Bike</th>
+                <th>Model</th>
                 <th>Start</th>
                 <th>End</th>
                 <th>Status</th>
@@ -34,6 +36,8 @@
                 <td th:text="${rental.rentalId}">Rental</td>
                 <td th:text="${rental.lastName}">Last Name</td>
                 <td th:text="${rental.firstName}">First Name</td>
+                <td th:text="${rental.bike.manufacturer}">Bike</td>
+                <td th:text="${rental.bike.model}">Model</td>
                 <td th:text="${#dates.format(rental.startDay, 'dd-MM-yyyy')}">Start</td>
                 <td th:text="${#dates.format(rental.endDay, 'dd-MM-yyyy')}">End</td>
                 <td th:text="${rental.status.statusName}">Status</td>
