@@ -24,6 +24,7 @@ public class BikeRepositoryTests {
 
     @Autowired
     private BikeRepository bikeRepository;
+    @Autowired
     private CategoryRepository categoryRepository;
 
     /**
